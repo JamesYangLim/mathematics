@@ -1,0 +1,116 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${workspaceRoot}\\CMakeBuilds\\${name}",
+      "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
+          "type": "STRING"
+        },
+        {
+          "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
+          "value": "TRUE",
+          "type": "STRING"
+        }
+      ],
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x64-Release",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${workspaceRoot}\\CMakeBuilds\\${name}",
+      "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
+          "type": "STRING"
+        },
+        {
+          "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
+          "value": "TRUE",
+          "type": "STRING"
+        }
+      ],
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x64-Debug-clang",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${workspaceRoot}\\..\\build\\${name}",
+      "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-j8",
+      "variables": [
+        {
+          "name": "CMAKE_CXX_COMPILER",
+          "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
+          "type": "STRING"
+        },
+        {
+          "name": "CMAKE_C_COMPILER",
+          "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
+          "type": "STRING"
+        },
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
+          "type": "STRING"
+        },
+        {
+          "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
+          "value": "TRUE",
+          "type": "STRING"
+        }
+      ],
+      "ctestCommandArgs": ""
+    },
+    {
+      "name": "x64-Release-clang",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${workspaceRoot}\\..\\build\\${name}",
+      "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-j8",
+      "variables": [
+        {
+          "name": "CMAKE_CXX_COMPILER",
+          "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
+          "type": "STRING"
+        },
+        {
+          "name": "CMAKE_C_COMPILER",
+          "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
+          "type": "STRING"
+        },
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
+          "type": "STRING"
+        },
+        {
+          "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
+          "value": "TRUE",
+          "type": "STRING"
+        }
+      ],
+      "ctestCommandArgs": ""
+    }
+  ]
+}
