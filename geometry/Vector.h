@@ -16,9 +16,12 @@ namespace geom
         {}
 
         friend std::ostream& operator<<(std::ostream& os, const Vector& v);
-
         Vector operator+(const Vector& rhs) const;
-
+        Vector operator-(const Vector& rhs) const;
+        Vector operator*(T v) const;
+        Vector operator/(T v) const;
+        Vector DotProduct(const Vector& rhs) const;
+        Vector CrossProduct(const Vector& rhs) const;
     };
 
 
