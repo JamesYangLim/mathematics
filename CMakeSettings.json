@@ -11,14 +11,13 @@
       "buildCommandArgs": "-v",
       "variables": [
         {
-          "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
-          "type": "STRING"
-        },
-        {
           "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
           "value": "TRUE",
           "type": "STRING"
+        },
+        {
+          "name": "BUILD_SHARED_LIBS",
+          "value": "OFF"
         }
       ],
       "ctestCommandArgs": ""
@@ -42,6 +41,10 @@
           "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
           "value": "TRUE",
           "type": "STRING"
+        },
+        {
+          "name": "BUILD_SHARED_LIBS",
+          "value": "OFF"
         }
       ],
       "ctestCommandArgs": ""
@@ -75,6 +78,10 @@
           "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
           "value": "TRUE",
           "type": "STRING"
+        },
+        {
+          "name": "BUILD_SHARED_LIBS",
+          "value": "OFF"
         }
       ],
       "ctestCommandArgs": ""
@@ -108,6 +115,10 @@
           "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
           "value": "TRUE",
           "type": "STRING"
+        },
+        {
+          "name": "BUILD_SHARED_LIBS",
+          "value": "OFF"
         }
       ],
       "ctestCommandArgs": ""
