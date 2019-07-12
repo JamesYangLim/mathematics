@@ -32,11 +32,11 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
       "variables": [
-        {
-          "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
-          "type": "STRING"
-        },
+        //{
+        //  "name": "CMAKE_TOOLCHAIN_FILE",
+        //  "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
+        //  "type": "STRING"
+        //},
         {
           "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
           "value": "TRUE",
@@ -69,11 +69,11 @@
           "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
           "type": "STRING"
         },
-        {
-          "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
-          "type": "STRING"
-        },
+        //{
+        //  "name": "CMAKE_TOOLCHAIN_FILE",
+        //  "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
+        //  "type": "STRING"
+        //},
         {
           "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
           "value": "TRUE",
@@ -106,11 +106,11 @@
           "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
           "type": "STRING"
         },
-        {
-          "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
-          "type": "STRING"
-        },
+        //{
+        //  "name": "CMAKE_TOOLCHAIN_FILE",
+        //  "value": "${env.VCPKG_ROOT_DIR}\\scripts\\buildsystems\\vcpkg.cmake",
+        //  "type": "STRING"
+        //},
         {
           "name": "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS",
           "value": "TRUE",

@@ -163,4 +163,4 @@ namespace geom
             (lhs[0] * rhs[1]) - (lhs[1] * rhs[0]));
     }
 
-}
+} // namespace geom
