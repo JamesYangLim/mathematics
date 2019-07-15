@@ -11,30 +11,22 @@ Random.h
 
 namespace geom
 {
+    // std::random_device()
+
     /////////////////////// Random number generator
 
-    inline std::mt19937 MakeRandomEngine(bool useRandomSeed = false)
+    inline std::mt19937 GetRandomEngine(uint32_t seed = 5489U)
     {
-        // Will be used to obtain a seed for the random number engine
-        if (useRandomSeed)
-        {
-            return std::mt19937(std::random_device()());
-        }
-        else
-        {
-            return std::mt19937();
-        }
+        return std::mt19937(seed);
     }
 
     template<typename T>
-    struct uniform_dist
-    {
-    };
+    struct uniform_dist {};
 
     template<>
-    struct uniform_dist<int> : std::uniform_int_distribution<int>
+    struct uniform_dist<int32_t> : std::uniform_int_distribution<int32_t>
     {
-        uniform_dist(int min, int max) : std::uniform_int_distribution<int>(min, max) {}
+        uniform_dist(int32_t min, int32_t max) : std::uniform_int_distribution<int32_t>(min, max) {}
     };
 
     template<>
@@ -49,11 +41,10 @@ namespace geom
         uniform_dist(double min, double max) : std::uniform_real_distribution<double>(min, max) {}
     };
 
-
     /////////////////////// Random point generator
 
     template<typename T, size_t D, typename RandomEng>
-    Point<T, D> RandomPoint(RandomEng e, T min, T max)
+    Point<T, D> RandomPoint(RandomEng& e, T min, T max)
     {
         assert(max >= min);
         uniform_dist<T> rng(min, max);

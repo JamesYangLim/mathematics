@@ -1,11 +1,15 @@
+/*
+main.cpp
+*/
+
 #include <iostream>
 #include <conio.h>
 
-void TestVector();
+void TestPoint();
 
 int main()
 {
-    TestVector();
+    TestPoint();
 
     std::cout << "Press a key...";
     _getch();

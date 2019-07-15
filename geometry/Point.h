@@ -27,12 +27,16 @@ namespace geom
     template<typename T, size_t D> Point<T, D>& operator-=(Point<T, D>& lhs, const Point<T, D>& rhs);
     template<typename T, size_t D> Point<T, D>& operator*=(Point<T, D>& lhs, T scalar);
     template<typename T, size_t D> Point<T, D>& operator/=(Point<T, D>& lhs, T scalar);
+
+    template<typename T, size_t D> bool operator==(const Point<T, D>& lhs, const Point<T, D>& rhs);
+    template<typename T, size_t D> bool operator!=(const Point<T, D>& lhs, const Point<T, D>& rhs);
+
     template<typename T, size_t D> T DotProduct(const Point<T, D>& lhs, const Point<T, D>& rhs);
 
     //////////////////////////// Point2
 
     template<typename T> using Point2 = Point<T, 2>;
-    using Point2i = Point2<int>;
+    using Point2i = Point2<int32_t>;
     using Point2f = Point2<float>;
     using Point2d = Point2<double>;
 
@@ -41,7 +45,7 @@ namespace geom
     //////////////////////////// Point3
 
     template<typename T> using Point3 = Point<T, 3>;
-    using Point3i = Point3<int>;
+    using Point3i = Point3<int32_t>;
     using Point3f = Point3<float>;
     using Point3d = Point3<double>;
 
@@ -103,7 +107,10 @@ namespace geom
     template<typename T, size_t D> 
     Point<T, D> operator/(const Point<T, D>& lhs, T scalar)
     {
-        return rhs * (1.0 / scalar);
+        Point<T, D> r;
+        for (size_t i = 0; i < lhs.size(); ++i)
+            r[i] = lhs[i] / scalar;
+        return r;
     }
 
     template<typename T, size_t D> 
@@ -135,7 +142,9 @@ namespace geom
     template<typename T, size_t D> 
     Point<T, D>& operator/=(Point<T, D>& lhs, T scalar)
     {
-        return lhs *= (1.0 / scalar);
+        for (size_t i = 0; i < lhs.size(); ++i)
+            lhs[i] /= scalar;
+        return lhs;
     }
 
     template<typename T, size_t D> 
@@ -161,6 +170,22 @@ namespace geom
             (lhs[1] * rhs[2]) - (lhs[2] * rhs[1]),
             (lhs[2] * rhs[0]) - (lhs[0] * rhs[2]),
             (lhs[0] * rhs[1]) - (lhs[1] * rhs[0]));
+    }
+
+    template<typename T, size_t D> 
+    bool operator==(const Point<T, D>& lhs, const Point<T, D>& rhs)
+    {
+        assert(lhs.size() == rhs.size());
+        for (size_t i = 0; i < lhs.size(); ++i)
+            if (lhs[i] != rhs[i])
+                return false;
+        return true;
+    }
+
+    template<typename T, size_t D> 
+    bool operator!=(const Point<T, D>& lhs, const Point<T, D>& rhs)
+    {
+        return !(lhs == rhs);
     }
 
 } // namespace geom
