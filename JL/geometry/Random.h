@@ -4,12 +4,13 @@ Random.h
 
 #pragma once
 
-#include "geometry/Point.h"
+#include "JL/geometry/Point.h"
+#include "JL/utils/Utils.h"
 
 #include <random>
 #include <cassert>
 
-namespace geom
+namespace jl
 {
     // std::random_device()
 
@@ -46,7 +47,7 @@ namespace geom
     template<typename T, size_t D, typename RandomEng>
     Point<T, D> RandomPoint(RandomEng& e, T min, T max)
     {
-        assert(max >= min);
+        ASSERT(max >= min);
         uniform_dist<T> rng(min, max);
         std::array<T, D> v;
         for (size_t i = 0; i < D; ++i)
@@ -56,4 +57,4 @@ namespace geom
         return Point<T, D>{v};
     }
 
-} // namespace geom
+} // namespace jl

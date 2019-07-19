@@ -1,13 +1,20 @@
 /*
-Point.h 
+Point.h
+
+Point is a representation of a Euclidean vector to distinguish between vector in computer science and physics.
+https://en.wikipedia.org/wiki/Euclidean_vector
+
 */
 
 #pragma once
 
+#include "JL/utils/Utils.h"
+
+#include <cmath>
 #include <array>
 #include <cassert>
 
-namespace geom
+namespace jl
 {
     template <typename T, size_t D>
     struct Point : std::array<T, D>
@@ -32,6 +39,12 @@ namespace geom
     template<typename T, size_t D> bool operator!=(const Point<T, D>& lhs, const Point<T, D>& rhs);
 
     template<typename T, size_t D> T DotProduct(const Point<T, D>& lhs, const Point<T, D>& rhs);
+    template<typename T, size_t D> T MagnitudeSquare(const Point<T, D>& p);
+    template<typename T, size_t D> T Magnitude(const Point<T, D>& p);
+    template<typename T, size_t D> Point<T, D>& Normalise(Point<T, D>& p);
+    template<typename T, size_t D> Point<T, D> Repeat(T v);
+    template<typename T, size_t D> Point<T, D> Zero();
+    template<typename T, size_t D> T AngleBetween(const Point<T, D>& lhs, const Point<T, D>& rhs);
 
     //////////////////////////// Point2
 
@@ -60,9 +73,7 @@ namespace geom
         for (int i = 0; i < v.size(); ++i)
         {
             if (i > 0) 
-            {
                 os << ',';
-            }
             os << v[i];
         }
         os << ")";
@@ -72,7 +83,7 @@ namespace geom
     template<typename T, size_t D> 
     Point<T, D> operator+(const Point<T, D>& lhs, const Point<T, D>& rhs)
     {
-        assert(lhs.size() == rhs.size());
+        ASSERT(lhs.size() == rhs.size());
         Point<T, D> r;
         for (size_t i = 0; i < lhs.size(); ++i)
             r[i] = lhs[i] + rhs[i];
@@ -82,7 +93,7 @@ namespace geom
     template<typename T, size_t D>
     Point<T, D> operator-(const Point<T, D>& lhs, const Point<T, D>& rhs)
     {
-        assert(lhs.size() == rhs.size());
+        ASSERT(lhs.size() == rhs.size());
         Point<T, D> r;
         for (size_t i = 0; i < lhs.size(); ++i)
             r[i] = lhs[i] - rhs[i];
@@ -116,7 +127,7 @@ namespace geom
     template<typename T, size_t D> 
     Point<T, D>& operator+=(Point<T, D>& lhs, const Point<T, D>& rhs)
     {
-        assert(lhs.size() == rhs.size());
+        ASSERT(lhs.size() == rhs.size());
         for (size_t i = 0; i < lhs.size(); ++i)
             lhs[i] += rhs[i];
         return lhs;
@@ -125,7 +136,7 @@ namespace geom
     template<typename T, size_t D> 
     Point<T, D>& operator-=(Point<T, D>& lhs, const Point<T, D>& rhs)
     {
-        assert(lhs.size() == rhs.size());
+        ASSERT(lhs.size() == rhs.size());
         for (size_t i = 0; i < lhs.size(); ++i)
             lhs[i] -= rhs[i];
         return lhs;
@@ -150,7 +161,7 @@ namespace geom
     template<typename T, size_t D> 
     T DotProduct(const Point<T, D>& lhs, const Point<T, D>& rhs)
     {
-        assert(lhs.size() == rhs.size());
+        ASSERT(lhs.size() == rhs.size());
         T sum = 0;
         for (size_t i = 0; i < lhs.size(); ++i)
             sum += lhs[i] * rhs[i];
@@ -175,7 +186,7 @@ namespace geom
     template<typename T, size_t D> 
     bool operator==(const Point<T, D>& lhs, const Point<T, D>& rhs)
     {
-        assert(lhs.size() == rhs.size());
+        ASSERT(lhs.size() == rhs.size());
         for (size_t i = 0; i < lhs.size(); ++i)
             if (lhs[i] != rhs[i])
                 return false;
@@ -188,4 +199,46 @@ namespace geom
         return !(lhs == rhs);
     }
 
-} // namespace geom
+    template<typename T, size_t D> 
+    T MagnitudeSquare(const Point<T, D>& p)
+    {
+        return DotProduct(p, p);
+    }
+
+    template<typename T, size_t D> 
+    T Magnitude(const Point<T, D>& p)
+    {
+        return std::sqrt(MagnitudeSquare(p));
+    }
+
+    template<typename T, size_t D> 
+    Point<T, D>& Normalise(Point<T, D>& p)
+    {
+        T m = Magnitude(p);
+        for (size_t i = 0; i < p.size(); ++i)
+            p[i] / m;
+        return p;
+    }
+
+    template<typename T, size_t D> 
+    Point<T, D> Repeat(T v)
+    {
+        Point<T, D> p;
+        for (size_t i = 0; i < p.size(); ++i)
+            p[i] = v;
+        return p;
+    }
+
+    template<typename T, size_t D> 
+    Point<T, D> Zero()
+    {
+        return Repeat(0);
+    }
+
+    template<typename T, size_t D> 
+    T AngleBetween(const Point<T, D>& lhs, const Point<T, D>& rhs)
+    {
+        return std::acos(DotProduct(lhs, rhs) / std::sqrt(MagnitudeSquare(lhs) * MagnitudeSquare(rhs)));
+    }
+
+} // namespace jl

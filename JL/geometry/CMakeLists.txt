@@ -1,4 +1,6 @@
-#include(GenerateExportHeader)
+#
+#   geometry CMakeLists.txt
+#
 
 add_library(geometry src/temp.cpp)
 target_include_directories(geometry PUBLIC ${PROJECT_SOURCE_DIR})
