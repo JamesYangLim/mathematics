@@ -6,9 +6,15 @@ PointTest.cpp
 #include "JL/geometry/Point.h"
 
 #include <iostream>
-#include <cassert>
+
+# define PI 3.14159265358979323846
 
 using namespace jl;
+
+int32_t ToDegree(float radian)
+{
+    return std::round((radian * 180) / PI);
+}
 
 void TestPoint()
 {
@@ -97,6 +103,39 @@ void TestPoint()
                 s2 = jl::DotProduct(a, (s * b));
                 ALWAYS_ASSERT(s1 == s2);
             }
+        }
+    }
+
+    // Cross product
+    {
+        std::cout << "Test 3: Cross product test\n";
+
+        using T = float;
+        const size_t D = 3;
+        const T min = -10;
+        const T max = 10;
+        jl::uniform_dist<T> rn(min, max);
+
+        for (size_t i = 0; i < 1000000; ++i)
+        {
+            auto a = jl::RandomPoint<T, D>(reng, min, max);
+            auto b = jl::RandomPoint<T, D>(reng, min, max);
+
+            // self cross product of a vector is the zero vector
+            auto zero = Zero<T, D>();
+            ALWAYS_ASSERT(CrossProduct(a, a) == zero);
+            ALWAYS_ASSERT(CrossProduct(b, b) == zero);
+
+            // anticommutative
+            auto c = CrossProduct(a, b);
+            auto d = CrossProduct(b, a);
+            ALWAYS_ASSERT(c == -d);
+
+            // a x b = c -> c is perpendicular to a & b
+            int32_t angle1 = ToDegree(AngleBetween(a, c));
+            int32_t angle2 = ToDegree(AngleBetween(b, c));
+            ALWAYS_ASSERT(angle1 == 90);
+            ALWAYS_ASSERT(angle2 == angle1);
         }
     }
 }

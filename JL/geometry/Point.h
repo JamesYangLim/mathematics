@@ -35,10 +35,13 @@ namespace jl
     template<typename T, size_t D> Point<T, D>& operator*=(Point<T, D>& lhs, T scalar);
     template<typename T, size_t D> Point<T, D>& operator/=(Point<T, D>& lhs, T scalar);
 
+    template<typename T, size_t D> Point<T, D>& operator-(Point<T, D>& p);
+
     template<typename T, size_t D> bool operator==(const Point<T, D>& lhs, const Point<T, D>& rhs);
     template<typename T, size_t D> bool operator!=(const Point<T, D>& lhs, const Point<T, D>& rhs);
 
     template<typename T, size_t D> T DotProduct(const Point<T, D>& lhs, const Point<T, D>& rhs);
+    template<typename T, size_t D> T ScalarTripleProduct(const Point<T, D>& a, const Point<T, D>& b, const Point<T, D>& c);
     template<typename T, size_t D> T MagnitudeSquare(const Point<T, D>& p);
     template<typename T, size_t D> T Magnitude(const Point<T, D>& p);
     template<typename T, size_t D> Point<T, D>& Normalise(Point<T, D>& p);
@@ -159,6 +162,12 @@ namespace jl
     }
 
     template<typename T, size_t D> 
+    Point<T, D>& operator-(Point<T, D>& p)
+    {
+        return p *= (T)-1;
+    }
+
+    template<typename T, size_t D> 
     T DotProduct(const Point<T, D>& lhs, const Point<T, D>& rhs)
     {
         ASSERT(lhs.size() == rhs.size());
@@ -181,6 +190,12 @@ namespace jl
             (lhs[1] * rhs[2]) - (lhs[2] * rhs[1]),
             (lhs[2] * rhs[0]) - (lhs[0] * rhs[2]),
             (lhs[0] * rhs[1]) - (lhs[1] * rhs[0]));
+    }
+
+    template<typename T, size_t D> 
+    T ScalarTripleProduct(const Point<T, D>& a, const Point<T, D>& b, const Point<T, D>& c)
+    {
+        return DotProduct(a, CrossProduct(b, c));
     }
 
     template<typename T, size_t D> 
@@ -232,7 +247,7 @@ namespace jl
     template<typename T, size_t D> 
     Point<T, D> Zero()
     {
-        return Repeat(0);
+        return Repeat<T, D>(0);
     }
 
     template<typename T, size_t D> 
