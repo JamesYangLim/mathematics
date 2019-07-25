@@ -9,7 +9,12 @@
       "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
-      "variables": [],
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${workspaceRoot}\\Toolchain\\settings.cmake"
+        }
+      ],
       "ctestCommandArgs": ""
     },
     {
@@ -21,7 +26,12 @@
       "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
-      "variables": [],
+      "variables": [
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${workspaceRoot}\\Toolchain\\settings.cmake"
+        }
+      ],
       "ctestCommandArgs": ""
     },
     {
@@ -43,6 +53,10 @@
           "name": "CMAKE_C_COMPILER",
           "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
           "type": "STRING"
+        },
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${workspaceRoot}\\Toolchain\\settings.cmake"
         }
       ],
       "ctestCommandArgs": ""
@@ -66,6 +80,10 @@
           "name": "CMAKE_C_COMPILER",
           "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
           "type": "STRING"
+        },
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "${workspaceRoot}\\Toolchain\\settings.cmake"
         }
       ],
       "ctestCommandArgs": ""
