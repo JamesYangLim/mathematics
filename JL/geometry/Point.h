@@ -2,8 +2,26 @@
 Point.h
 
 Point is a representation of a Euclidean vector to distinguish between vector in computer science and physics.
-https://en.wikipedia.org/wiki/Euclidean_vector
 
+https://en.wikipedia.org/wiki/Euclidean_vector
+https://en.wikipedia.org/wiki/Vector_space#Definition
+
+Definition:
+    V = vector set
+    v, u, w = vector
+    0 = zero vector
+    F = field
+    a, b = scalar (elements of F)
+
+Axioms:
+    Associative addition:   u + (v + w) = (u + v) + w
+    Commutative addition:   u + v = v + u
+    Identity element of addition:   There exist 0 in V -> v + 0 = v for all v in V
+    Inverse elements of addition:   For all v in V, there exist -v in V -> v + (-v) = 0
+    Compatibility of scalar multiplication with field multiplication:   a(bv) = (ab)v
+    Identity element of scalar multiplication:  1 * v = v, 1 denotes multiplicative identity in F
+    Distributivity of scalar multiplication with respect to vector addition:    a(u + v) = au + av
+    Distributivity of scalar multiplication with respect to field addition:     (a + b)v = av + bv
 */
 
 #pragma once
