@@ -45,26 +45,30 @@ namespace jl
     template<typename T, size_t D> std::ostream& operator<<(std::ostream& os, const Point<T, D>& v);
     template<typename T, size_t D> Point<T, D> operator+(const Point<T, D>& lhs, const Point<T, D>& rhs);
     template<typename T, size_t D> Point<T, D> operator-(const Point<T, D>& lhs, const Point<T, D>& rhs);
-    template<typename T, size_t D> Point<T, D> operator*(const Point<T, D>& lhs, T scalar);
-    template<typename T, size_t D> Point<T, D> operator*(T scalar, const Point<T, D>& rhs);
-    template<typename T, size_t D> Point<T, D> operator/(const Point<T, D>& lhs, T scalar);
+    template<typename T, size_t D> Point<T, D>& operator-(Point<T, D>& p);
+    template<typename T, size_t D> Point<T, D> operator*(const Point<T, D>& lhs, T s);
+    template<typename T, size_t D> Point<T, D> operator*(T s, const Point<T, D>& rhs);
+    template<typename T, size_t D> Point<T, D> operator/(const Point<T, D>& lhs, T s);
+
     template<typename T, size_t D> Point<T, D>& operator+=(Point<T, D>& lhs, const Point<T, D>& rhs);
     template<typename T, size_t D> Point<T, D>& operator-=(Point<T, D>& lhs, const Point<T, D>& rhs);
-    template<typename T, size_t D> Point<T, D>& operator*=(Point<T, D>& lhs, T scalar);
-    template<typename T, size_t D> Point<T, D>& operator/=(Point<T, D>& lhs, T scalar);
-
-    template<typename T, size_t D> Point<T, D>& operator-(Point<T, D>& p);
+    template<typename T, size_t D> Point<T, D>& operator*=(Point<T, D>& lhs, T s);
+    template<typename T, size_t D> Point<T, D>& operator/=(Point<T, D>& lhs, T s);
 
     template<typename T, size_t D> bool operator==(const Point<T, D>& lhs, const Point<T, D>& rhs);
     template<typename T, size_t D> bool operator!=(const Point<T, D>& lhs, const Point<T, D>& rhs);
 
     template<typename T, size_t D> T DotProduct(const Point<T, D>& lhs, const Point<T, D>& rhs);
     template<typename T, size_t D> T ScalarTripleProduct(const Point<T, D>& a, const Point<T, D>& b, const Point<T, D>& c);
+
     template<typename T, size_t D> T MagnitudeSquare(const Point<T, D>& p);
     template<typename T, size_t D> T Magnitude(const Point<T, D>& p);
     template<typename T, size_t D> Point<T, D>& Normalise(Point<T, D>& p);
+    
     template<typename T, size_t D> Point<T, D> Repeat(T v);
     template<typename T, size_t D> Point<T, D> Zero();
+    template<typename T, size_t D> Point<T, D> UnitPoint();
+
     template<typename T, size_t D> T AngleBetween(const Point<T, D>& lhs, const Point<T, D>& rhs);
 
     //////////////////////////// Point2
@@ -122,26 +126,27 @@ namespace jl
     }
 
     template<typename T, size_t D> 
-    Point<T, D> operator*(const Point<T, D>& lhs, T scalar)
+    Point<T, D> operator*(const Point<T, D>& lhs, T s)
     {
         Point<T, D> r;
         for (size_t i = 0; i < lhs.size(); ++i)
-            r[i] = lhs[i] * scalar;
+            r[i] = lhs[i] * s;
         return r;
     }
 
     template<typename T, size_t D> 
-    Point<T, D> operator*(T scalar, const Point<T, D>& rhs)
+    Point<T, D> operator*(T s, const Point<T, D>& rhs)
     {
-        return rhs * scalar;
+        return rhs * s;
     }
 
     template<typename T, size_t D> 
-    Point<T, D> operator/(const Point<T, D>& lhs, T scalar)
+    Point<T, D> operator/(const Point<T, D>& lhs, T s)
     {
+        ASSERT(s != 0);
         Point<T, D> r;
         for (size_t i = 0; i < lhs.size(); ++i)
-            r[i] = lhs[i] / scalar;
+            r[i] = lhs[i] / s;
         return r;
     }
 
@@ -164,18 +169,19 @@ namespace jl
     }
 
     template<typename T, size_t D> 
-    Point<T, D>& operator*=(Point<T, D>& lhs, T scalar)
+    Point<T, D>& operator*=(Point<T, D>& lhs, T s)
     {
         for (size_t i = 0; i < lhs.size(); ++i)
-            lhs[i] *= scalar;
+            lhs[i] *= s;
         return lhs;
     }
 
     template<typename T, size_t D> 
-    Point<T, D>& operator/=(Point<T, D>& lhs, T scalar)
+    Point<T, D>& operator/=(Point<T, D>& lhs, T s)
     {
+        ASSERT(s != 0);
         for (size_t i = 0; i < lhs.size(); ++i)
-            lhs[i] /= scalar;
+            lhs[i] /= s;
         return lhs;
     }
 
@@ -266,6 +272,12 @@ namespace jl
     Point<T, D> Zero()
     {
         return Repeat<T, D>(0);
+    }
+
+    template<typename T, size_t D> 
+    Point<T, D> UnitPoint()
+    {
+        return Repeat<T, D>(1);
     }
 
     template<typename T, size_t D> 

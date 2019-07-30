@@ -49,12 +49,12 @@ namespace jl
     {
         ASSERT(max >= min);
         uniform_dist<T> rng(min, max);
-        std::array<T, D> v;
+        Point<T, D> v;
         for (size_t i = 0; i < D; ++i)
         {
             v[i] = rng(e);
         }
-        return Point<T, D>{v};
+        return v;
     }
 
 } // namespace jl

@@ -18,22 +18,24 @@ int32_t ToDegree(float radian)
 
 void TestPoint()
 {
+    std::cout << "##### Point Test #####\n";
+
     using T = int32_t;
-    auto reng = jl::GetRandomEngine();
+    const size_t D = 3;
+    const T min = -10;
+    const T max = 10;
 
-    // Arithmetic operation test
+    uniform_dist<T> rnInt32(min, max);
+    auto reng = GetRandomEngine();
+
+    // Addition
     {
-        std::cout << "Test 1: Arithmetic operation test\n";
+        std::cout << "Test 1: Addition test\n";
 
-        const size_t D = 3;
-        const T min = -10;
-        const T max = 10;
-        jl::uniform_dist<T> rn(min, max);
-        
-        for (size_t i = 0; i < 100000; ++i)
+        for (size_t i = 0; i < 1000000; ++i)
         {
-            auto a = jl::RandomPoint<T, D>(reng, min, max);
-            auto b = jl::RandomPoint<T, D>(reng, min, max);
+            auto a = RandomPoint<T, D>(reng, min, max);
+            auto b = RandomPoint<T, D>(reng, min, max);
 
             auto c = a + b;
             a += b;
@@ -42,11 +44,21 @@ void TestPoint()
             c = b - a;
             b -= a;
             ALWAYS_ASSERT(c == b);
+        }
+    }
 
-            T s = rn(reng);
+    // Scalar multiplication
+    {
+        std::cout << "Test 2: Scalar multiplication test\n";
+
+        for (size_t i = 0; i < 1000000; ++i)
+        {
+            auto a = RandomPoint<T, D>(reng, min, max);
+
+            T s = rnInt32(reng);
             if (s == 0) ++s;
 
-            c = s * a;
+            auto c = s * a;
             a *= s;
             ALWAYS_ASSERT(a == c);
 
@@ -56,70 +68,57 @@ void TestPoint()
         }
     }
 
-    // Dot product test
+    // Dot product
     {
-        std::cout << "Test 2: Dot product test\n";
+        std::cout << "Test 3: Dot product test\n";
 
-        const size_t D = 3;
-        const T min = -10;
-        const T max = 10;
-        jl::uniform_dist<T> rn(min, max);
-
-        for (size_t i = 0; i < 1000; ++i)
+        for (size_t i = 0; i < 1000000; ++i)
         {
-            auto a = jl::RandomPoint<T, D>(reng, min, max);
-            auto b = jl::RandomPoint<T, D>(reng, min, max);
-            auto c = jl::RandomPoint<T, D>(reng, min, max);
+            auto a = RandomPoint<T, D>(reng, min, max);
+            auto b = RandomPoint<T, D>(reng, min, max);
+            auto c = RandomPoint<T, D>(reng, min, max);
 
-            {
-                T s = jl::DotProduct(a, a);
-                T mSqd = jl::MagnitudeSquare(a);
-                ALWAYS_ASSERT(s == mSqd);
-            }
+            T d = DotProduct(a, a);
+            T mSqd = MagnitudeSquare(a);
+            ALWAYS_ASSERT(d == mSqd);
 
-            {
-                // Commutative
-                T s1 = jl::DotProduct(a, b);
-                T s2 = jl::DotProduct(b, a);
-                ALWAYS_ASSERT(s1 == s2);
-                
-                // Distributive
-                s1 = jl::DotProduct(a, (b + c));
-                s2 = jl::DotProduct(a, b) + jl::DotProduct(a, c);
-                ALWAYS_ASSERT(s1 == s2);
+            // Commutative
+            T s1 = DotProduct(a, b);
+            T s2 = DotProduct(b, a);
+            ALWAYS_ASSERT(s1 == s2);
 
-                T s = rn(reng);
-                if (s == 0) ++s;
+            // Distributive
+            s1 = DotProduct(a, (b + c));
+            s2 = DotProduct(a, b) + DotProduct(a, c);
+            ALWAYS_ASSERT(s1 == s2);
 
-                // Bilinear
-                s1 = jl::DotProduct(a, (s * b + c));
-                s2 = s * jl::DotProduct(a, b) + jl::DotProduct(a, c);
-                ALWAYS_ASSERT(s1 == s2);
+            T s = rnInt32(reng);
+            if (s == 0) ++s;
 
-                // Associative law for scalar and dot product
-                s1 = s * jl::DotProduct(a, b);
-                s2 = jl::DotProduct((s * a), b);
-                ALWAYS_ASSERT(s1 == s2);
-                s2 = jl::DotProduct(a, (s * b));
-                ALWAYS_ASSERT(s1 == s2);
-            }
+            // Bilinear
+            s1 = DotProduct(a, (s * b + c));
+            s2 = s * DotProduct(a, b) + DotProduct(a, c);
+            ALWAYS_ASSERT(s1 == s2);
+
+            // Associative law for scalar and dot product
+            s1 = s * DotProduct(a, b);
+            s2 = DotProduct((s * a), b);
+            ALWAYS_ASSERT(s1 == s2);
+            s2 = DotProduct(a, (s * b));
+            ALWAYS_ASSERT(s1 == s2);
         }
     }
 
     // Cross product
     {
-        std::cout << "Test 3: Cross product test\n";
+        std::cout << "Test 4: Cross product test\n";
 
         using T = float;
-        const size_t D = 3;
-        const T min = -10;
-        const T max = 10;
-        jl::uniform_dist<T> rn(min, max);
 
         for (size_t i = 0; i < 1000000; ++i)
         {
-            auto a = jl::RandomPoint<T, D>(reng, min, max);
-            auto b = jl::RandomPoint<T, D>(reng, min, max);
+            auto a = RandomPoint<T, D>(reng, min, max);
+            auto b = RandomPoint<T, D>(reng, min, max);
 
             // self cross product of a vector is the zero vector
             auto zero = Zero<T, D>();

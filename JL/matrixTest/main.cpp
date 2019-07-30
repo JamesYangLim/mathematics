@@ -11,7 +11,7 @@ void TestTransformation();
 int main()
 {
     TestMatrix();
-    TestTransformation();
+    //TestTransformation();
 
     std::cout << "Press a key...";
     _getch();

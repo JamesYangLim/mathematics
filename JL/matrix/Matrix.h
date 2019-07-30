@@ -4,6 +4,8 @@ Matrix.h
 
 #pragma once
 
+#include "JL/utils/Utils.h"
+
 #include <array>
 
 namespace jl
@@ -13,13 +15,42 @@ namespace jl
     M = number of rows
     */
     template <typename T, size_t N, size_t M>
-    struct Matrix : std::array<T, N* M>
+    struct Matrix
     {
-        Matrix() : std::array<T, N* M>()
+        using Coords = std::array<T, N* M>;
+
+        Coords Elements;
+
+        template <typename... Values>
+        Matrix(Values... values) : Elements(std::array<T, N* M>({ std::forward<Values>(values)... }))
         {}
+
+        const size_t NumColumns() const { return N; }
+        const size_t NumRows() const { return M; }
+        T& operator[](size_t i) { return Elements[i]; }
+        const T& operator[](size_t i) const { return Elements[i]; }
     };
 
     template<typename T, size_t N, size_t M> std::ostream& operator<<(std::ostream& os, const Matrix<T, N, M>& A);
+
+    template<typename T, size_t N, size_t M> Matrix<T, N, M> operator+(const Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs);
+    template<typename T, size_t N, size_t M> Matrix<T, N, M> operator-(const Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs);
+    template<typename T, size_t N, size_t M> Matrix<T, N, M> operator*(const Matrix<T, N, M>& lhs, T s);
+    template<typename T, size_t N, size_t M> Matrix<T, N, M> operator*(T s, const Matrix<T, N, M>& rhs);
+    template<typename T, size_t N, size_t M> Matrix<T, N, M> operator/(const Matrix<T, N, M>& lhs, T s);
+
+    template<typename T, size_t N, size_t M> Matrix<T, N, M>& operator+=(Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs);
+    template<typename T, size_t N, size_t M> Matrix<T, N, M>& operator-=(Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs);
+    template<typename T, size_t N, size_t M> Matrix<T, N, M>& operator*=(Matrix<T, N, M>& lhs, T s);
+    template<typename T, size_t N, size_t M> Matrix<T, N, M>& operator/=(Matrix<T, N, M>& lhs, T s);
+
+    template<typename T, size_t N, size_t M> Matrix<T, M, N> Transpose(const Matrix<T, N, M>& A);
+
+
+
+    template<typename T, size_t N, size_t M> bool operator==(const Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs);
+    template<typename T, size_t N, size_t M> bool operator!=(const Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs);
+
 
     /*
     Rule of thumb for matrix multiplication:
@@ -29,11 +60,8 @@ namespace jl
     */
     template<typename T, size_t N, size_t M> Matrix<T, N, M> operator*(const Matrix<T, N, M>& A1, const Matrix<T, N, M>& A2);
     
-    template<typename T, size_t N, size_t M> Matrix<T, N, M> operator*(const Matrix<T, N, M>& A1, T s);
-    template<typename T, size_t N, size_t M> Matrix<T, N, M> operator*(T s, const Matrix<T, N, M>& A1);
 
-    // A1.N == A2.M 
-    template<typename T, size_t N, size_t M> Matrix<T, N, M> operator+(const Matrix<T, N, M>& A1, const Matrix<T, N, M>& A2);
+
     
     /*
     A + B = | A 0 |
@@ -41,9 +69,7 @@ namespace jl
     */
     template<typename T, size_t N, size_t M> Matrix<T, N, M> DirectSum(const Matrix<T, N, M>& A1, const Matrix<T, N, M>& A2);
 
-    template<typename T, size_t N, size_t M> Matrix<T, N, M> Transpose(const Matrix<T, N, M>& A);
 
-    template<typename T, size_t N, size_t M> bool operator==(const Matrix<T, N, M>& A1, const Matrix<T, N, M>& A2);
 
     template<typename T, size_t N, size_t M> Matrix<T, N, M> IdentityMatrix();
     template<typename T, size_t N, size_t M> Matrix<T, N, M>& InverseMatrix(Matrix<T, N, M>& A);
@@ -76,4 +102,100 @@ namespace jl
         return A;
     }
 
+    template<typename T, size_t N, size_t M> 
+    Matrix<T, N, M> operator+(const Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs)
+    {
+        Matrix<T, N, M> A;
+        for (size_t i = 0; i < N * M; ++i)
+            A[i] = lhs[i] + rhs[i];
+        return A;
+    }
+
+    template<typename T, size_t N, size_t M> 
+    Matrix<T, N, M> operator-(const Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs)
+    {
+        Matrix<T, N, M> A;
+        for (size_t i = 0; i < N * M; ++i)
+            A[i] = lhs[i] - rhs[i];
+        return A;
+    }
+
+    template<typename T, size_t N, size_t M> 
+    Matrix<T, N, M> operator*(const Matrix<T, N, M>& lhs, T s)
+    {
+        Matrix<T, N, M> A;
+        for (size_t i = 0; i < N*M; ++i)
+            A[i] = lhs[i] * s;
+        return A;
+    }
+
+    template<typename T, size_t N, size_t M> 
+    Matrix<T, N, M> operator*(T s, const Matrix<T, N, M>& rhs)
+    {
+        return rhs * s;
+    }
+
+    template<typename T, size_t N, size_t M> 
+    Matrix<T, N, M> operator/(const Matrix<T, N, M>& lhs, T s)
+    {
+        ASSERT(s != 0);
+        Matrix<T, N, M> A;
+        for (size_t i = 0; i < N * M; ++i)
+            A[i] = lhs[i] / s;
+        return A;
+    }
+
+    template<typename T, size_t N, size_t M>
+    Matrix<T, N, M>& operator+=(Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs)
+    {
+        for (size_t i = 0; i < N * M; ++i)
+            lhs[i] += rhs[i];
+        return lhs;
+    }
+
+    template<typename T, size_t N, size_t M>
+    Matrix<T, N, M>& operator-=(Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs)
+    {
+        for (size_t i = 0; i < N * M; ++i)
+            lhs[i] -= rhs[i];
+        return lhs;
+    }
+
+    template<typename T, size_t N, size_t M>
+    Matrix<T, N, M>& operator*=(Matrix<T, N, M>& lhs, T s)
+    {
+        for (size_t i = 0; i < N * M; ++i)
+            lhs[i] *= s;
+        return lhs;
+    }
+
+    template<typename T, size_t N, size_t M>
+    Matrix<T, N, M>& operator/=(Matrix<T, N, M>& lhs, T s)
+    {
+        ASSERT(s != 0);
+        for (size_t i = 0; i < N * M; ++i)
+            lhs[i] /= s;
+        return lhs;
+    }
+
+    template<typename T, size_t N, size_t M> 
+    bool operator==(const Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs)
+    {
+        return lhs.Elements == rhs.Elements;
+    }
+
+    template<typename T, size_t N, size_t M> 
+    bool operator!=(const Matrix<T, N, M>& lhs, const Matrix<T, N, M>& rhs)
+    {
+        return !(lhs.Elements == rhs.Elements);
+    }
+
+    template<typename T, size_t N, size_t M> 
+    Matrix<T, M, N> Transpose(const Matrix<T, N, M>& A)
+    {
+        Matrix<T, M, N> tA;
+        for (size_t i = 0; i < N * M; ++i)
+            tA[i] = A[i];
+        return tA;
+    }
 }
