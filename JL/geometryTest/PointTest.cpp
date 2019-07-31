@@ -32,7 +32,7 @@ void TestPoint()
     {
         std::cout << "Test 1: Addition test\n";
 
-        for (size_t i = 0; i < 1000000; ++i)
+        for (size_t i = 0; i < 1000; ++i)
         {
             auto a = RandomPoint<T, D>(reng, min, max);
             auto b = RandomPoint<T, D>(reng, min, max);
@@ -51,7 +51,7 @@ void TestPoint()
     {
         std::cout << "Test 2: Scalar multiplication test\n";
 
-        for (size_t i = 0; i < 1000000; ++i)
+        for (size_t i = 0; i < 1000; ++i)
         {
             auto a = RandomPoint<T, D>(reng, min, max);
 
@@ -72,7 +72,7 @@ void TestPoint()
     {
         std::cout << "Test 3: Dot product test\n";
 
-        for (size_t i = 0; i < 1000000; ++i)
+        for (size_t i = 0; i < 1000; ++i)
         {
             auto a = RandomPoint<T, D>(reng, min, max);
             auto b = RandomPoint<T, D>(reng, min, max);
@@ -115,7 +115,7 @@ void TestPoint()
 
         using T = float;
 
-        for (size_t i = 0; i < 1000000; ++i)
+        for (size_t i = 0; i < 1000; ++i)
         {
             auto a = RandomPoint<T, D>(reng, min, max);
             auto b = RandomPoint<T, D>(reng, min, max);

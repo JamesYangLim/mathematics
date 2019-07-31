@@ -7,15 +7,7 @@
       "inheritEnvironments": [ "msvc_x64_x64" ],
       "buildRoot": "${workspaceRoot}\\build\\${name}",
       "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "-v",
-      "variables": [
-        {
-          "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${workspaceRoot}\\Toolchain\\settings.cmake"
-        }
-      ],
-      "ctestCommandArgs": ""
+      "cmakeToolchain": "${workspaceRoot}\\Toolchain\\settings.cmake",
     },
     {
       "name": "x64-Release",
@@ -24,25 +16,16 @@
       "inheritEnvironments": [ "msvc_x64_x64" ],
       "buildRoot": "${workspaceRoot}\\build\\${name}",
       "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "-v",
-      "variables": [
-        {
-          "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${workspaceRoot}\\Toolchain\\settings.cmake"
-        }
-      ],
-      "ctestCommandArgs": ""
+      "cmakeToolchain": "${workspaceRoot}\\Toolchain\\settings.cmake",
     },
     {
       "name": "x64-Debug-clang",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "inheritEnvironments": [ "clang_cl_x64" ],
       "buildRoot": "${workspaceRoot}\\build\\${name}",
       "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "-j8",
+      "cmakeToolchain": "${workspaceRoot}\\Toolchain\\settings.cmake",
       "variables": [
         {
           "name": "CMAKE_CXX_COMPILER",
@@ -53,23 +36,17 @@
           "name": "CMAKE_C_COMPILER",
           "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
           "type": "STRING"
-        },
-        {
-          "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${workspaceRoot}\\Toolchain\\settings.cmake"
         }
-      ],
-      "ctestCommandArgs": ""
+      ]
     },
     {
       "name": "x64-Release-clang",
       "generator": "Ninja",
       "configurationType": "RelWithDebInfo",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "inheritEnvironments": [ "clang_cl_x64" ],
       "buildRoot": "${workspaceRoot}\\build\\${name}",
       "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "-j8",
+      "cmakeToolchain": "${workspaceRoot}\\Toolchain\\settings.cmake",
       "variables": [
         {
           "name": "CMAKE_CXX_COMPILER",
@@ -80,13 +57,8 @@
           "name": "CMAKE_C_COMPILER",
           "value": "C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
           "type": "STRING"
-        },
-        {
-          "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "${workspaceRoot}\\Toolchain\\settings.cmake"
         }
-      ],
-      "ctestCommandArgs": ""
+      ]
     }
   ]
 }

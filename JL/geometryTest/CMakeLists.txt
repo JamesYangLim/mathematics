@@ -7,3 +7,5 @@ add_executable(geometryTest
                 PointTest.cpp)
 
 target_link_libraries(geometryTest PUBLIC geometry utils)
+
+add_test(NAME geometryTest COMMAND geometryTest)

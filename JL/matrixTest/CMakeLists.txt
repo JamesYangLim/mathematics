@@ -8,3 +8,5 @@ add_executable(matrixTest
                 LinearTransformationTest.cpp)
 
 target_link_libraries(matrixTest PUBLIC matrix geometry utils)
+
+add_test(NAME matrixTest COMMAND matrixTest)
