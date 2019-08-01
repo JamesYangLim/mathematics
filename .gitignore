@@ -33,4 +33,5 @@
 
 # Folders
 .vs
+.vscode
 build
