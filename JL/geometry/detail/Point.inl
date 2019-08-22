@@ -11,22 +11,13 @@ Point.inl
 
 namespace jl
 {
-    template <typename T, size_t D>
-    struct Point : std::array<T, D>
-    {
-        template <typename... Values>
-        Point(Values... values) : std::array<T, D>({ std::forward<Values>(values)... })
-        {}
-    };
-
     template<typename T, size_t D>
     std::ostream& operator<<(std::ostream& os, const Point<T, D>& v)
     {
         os << "(";
         for (int i = 0; i < v.size(); ++i)
         {
-            if (i > 0)
-                os << ',';
+            if (i > 0) os << ',';
             os << v[i];
         }
         os << ")";
@@ -138,10 +129,10 @@ namespace jl
     template<typename T>
     Point<T, 3> CrossProduct(const Point<T, 3>& lhs, const Point<T, 3>& rhs)
     {
-        return Point3<T>(
+        return Point<T, 3>{
             (lhs[1] * rhs[2]) - (lhs[2] * rhs[1]),
             (lhs[2] * rhs[0]) - (lhs[0] * rhs[2]),
-            (lhs[0] * rhs[1]) - (lhs[1] * rhs[0]));
+            (lhs[0] * rhs[1]) - (lhs[1] * rhs[0])};
     }
 
     template<typename T, size_t D>

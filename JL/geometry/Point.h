@@ -30,7 +30,7 @@ Axioms:
 
 namespace jl
 {
-    template <typename T, size_t D> struct Point;
+    template <typename T, size_t D> using Point = std::array<T, D>;
 
     template<typename T, size_t D> std::ostream& operator<<(std::ostream& os, const Point<T, D>& v);
     template<typename T, size_t D> Point<T, D> operator+(const Point<T, D>& lhs, const Point<T, D>& rhs);
@@ -59,7 +59,6 @@ namespace jl
     template<typename T, size_t D> T AngleBetween(const Point<T, D>& lhs, const Point<T, D>& rhs);
 
     //////////////////////////// Point2
-
 
     template<typename T> using Point2 = Point<T, 2>;
     using Point2i = Point2<int32_t>;
