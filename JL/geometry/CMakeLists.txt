@@ -7,5 +7,3 @@ set(HEADERS Point.h Random.h)
 set(INL detail/Point.inl)
 
 add_library(geometry ${CPP} ${HEADERS} ${INL})
-
-target_include_directories(geometry PUBLIC ${PROJECT_SOURCE_DIR})

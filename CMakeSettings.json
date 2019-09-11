@@ -16,7 +16,7 @@
       "inheritEnvironments": [ "msvc_x64_x64" ],
       "buildRoot": "${workspaceRoot}\\build\\${name}",
       "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
-      "cmakeToolchain": "${workspaceRoot}\\Toolchain\\settings.cmake",
+      "cmakeToolchain": "${workspaceRoot}\\Toolchain\\settings.cmake"
     },
     {
       "name": "x64-Debug-clang",

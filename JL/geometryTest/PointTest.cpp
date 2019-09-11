@@ -13,7 +13,7 @@ using namespace jl;
 
 int32_t ToDegree(float radian)
 {
-    return std::round((radian * 180) / PI);
+    return (int32_t)std::round((radian * 180) / PI);
 }
 
 void TestPoint()
