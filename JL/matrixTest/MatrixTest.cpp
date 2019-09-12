@@ -20,13 +20,18 @@ void TestMatrix()
     uniform_dist<T> rnInt32(min, max);
     auto reng = GetRandomEngine();
 
+    {
+        auto a = DiagonalMatrix<T,3,3>(1);
+        std::cout << a;
+    }
+
     // Addition
     {
-        std::cout << "Test 1: Addition test\n";
+         std::cout << "Test 1: Addition test\n";
 
         const size_t M = 3, N = 3;
 
-        for (size_t i = 0; i < 1000; ++i)
+        for (size_t i = 0; i < 1; ++i)
         {
             auto a = RandomMatrix<T,M,N>(reng, min, max);
             auto b = RandomMatrix<T,M,N>(reng, min, max);
@@ -167,9 +172,14 @@ void TestMatrix()
 
     // Submatrix
     {
-        const size_t M=3, N=3;
-        auto a = RandomMatrix<T,M,N>(reng, min, max);
+        std::cout << "Test 5: Submatrix test\n";
+        {
+            const size_t M=3, N=3;
+            auto a = RandomMatrix<T,M,N>(reng, min, max);
 
-        Matrix<T,M-1,N-1> sub = Submatrix(a, 0, 1);
+            std::cout << a;
+            Matrix<T,M-1,N-1> sub = Submatrix(a, 0, 1);
+            std::cout << sub;
+        }
     }
 }

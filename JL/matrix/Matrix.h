@@ -12,19 +12,17 @@ namespace jl
     Matrix, A has a size of M x N (or M by N), where 
         M = number of rows 
         N = number of columns
-
-    - Column major
     */
     template <typename T, size_t M, size_t N>
     struct Matrix
     {
-        using Coords = std::array<T,M* N>;
+        using Coords = std::array<T,M*N>;
         using CoordType = typename Coords::value_type;
 
         Coords Elements;
 
         template <typename... Values>
-        Matrix(Values... values) : Elements(std::array<T,M* N>({ std::forward<Values>(values)... }))
+        Matrix(Values... values) : Elements(std::array<T,M*N>({ std::forward<Values>(values)... }))
         {}
 
         const size_t size() const { return Elements.size(); }
@@ -52,8 +50,7 @@ namespace jl
         2. NOT commutative (e.g. AB != BA)
         3. Any matrix can be multiplied element-wise by a scalar from its associated field
     */
-    template<typename T, size_t M, size_t N, size_t P>
-    Matrix<T,M,P> operator*(const Matrix<T,M,N>& A1, const Matrix<T,N,P>& A2);
+    template<typename T, size_t M, size_t N, size_t P> Matrix<T,M,P> operator*(const Matrix<T,M,N>& a1, const Matrix<T,N,P>& a2);
 
     template<typename T, size_t M, size_t N> bool operator==(const Matrix<T,M,N>& lhs, const Matrix<T,M,N>& rhs);
     template<typename T, size_t M, size_t N> bool operator!=(const Matrix<T,M,N>& lhs, const Matrix<T,M,N>& rhs);
