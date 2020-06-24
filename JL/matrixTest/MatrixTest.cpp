@@ -177,9 +177,28 @@ void TestMatrix()
             const size_t M=3, N=3;
             auto a = RandomMatrix<T,M,N>(reng, min, max);
 
-            std::cout << a;
             Matrix<T,M-1,N-1> sub = Submatrix(a, 0, 1);
             std::cout << sub;
         }
+    }
+
+    // Determinant
+    {
+        std::cout << "Test 6: Determinant test\n";
+        /*
+        Properties:
+        1. det(In) = 1 where In is the n x n identity matrix.
+        2. det(T(A)) = det(A), where T(A) denotes the transpose of A.
+        3. det(Inv(A)) = 1/det(A) = Inv(det(A)).
+        4. For square matrices A and B of equal size, det(AB) = det(A)det(B).
+        5. det(cA) = c^n det(A) for an n x n matrix, A.
+        */
+        {
+            const size_t M=3, N=3;
+            auto a = RandomMatrix<T,M,N>(reng, min, max);
+
+            T d = Determinant(a);
+        }
+
     }
 }

@@ -31,8 +31,7 @@ namespace jl
         T& operator[](size_t i) { return Elements[i]; }
         const T& operator[](size_t i) const { return Elements[i]; }
     };
-
-
+    
     template<typename T, size_t M, size_t N> std::ostream& operator<<(std::ostream& os, const Matrix<T,M,N>& a);
 
     template<typename T, size_t M, size_t N> Matrix<T,M,N> operator+(const Matrix<T,M,N>& lhs, const Matrix<T,M,N>& rhs);
@@ -62,9 +61,9 @@ namespace jl
     template<typename T, size_t M, size_t N> Matrix<T,N,M> Transpose(const Matrix<T,M,N>& a);
     
     template<typename T, size_t M, size_t N> Matrix<T,M-1,N-1> Submatrix(const Matrix<T,M,N>& a, int rowToRemove, int columnToRemove);
+    template<typename T, size_t M> T Determinant(const Matrix<T,M,M>& a);
 
     template<typename T, size_t N> Matrix<T, N, N>& InverseMatrix(Matrix<T, N, N>& a);
-    template<typename T, size_t N> T Determinant(const Matrix<T, N, N>& a);
 
     /*
     a + B = | a 0 |

@@ -173,4 +173,34 @@ namespace jl
         return submatrix;
     }
 
+    template<typename T, size_t M> 
+    T Determinant(const Matrix<T,M,M>& a)
+    {
+        T d(0);
+
+        if(M > 2)
+        {
+            for(size_t i = 0; i < M; ++i)
+            {
+                auto minor = Submatrix(a,0,i);
+                
+                ASSERT(a.NumRows() == a.NumColumns());
+                ASSERT(a.NumRows() == M-1);
+
+                if(i % 2) d += (a[i] * Determinant(minor));
+                else      d -= (a[i] * Determinant(minor));
+            }
+        }
+        else if(M == 2)
+        {
+            d = a[0]*a[3] - a[1]*a[2];
+        }
+        else if(M == 1)
+        {
+            d = a[0];
+        }
+        
+        return d;
+    }
+
 }
