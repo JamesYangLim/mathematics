@@ -197,7 +197,7 @@ void TestMatrix()
             const size_t M=3, N=3;
             auto a = RandomMatrix<T,M,N>(reng, min, max);
 
-            T d = Determinant(a);
+            //T d = Determinant(a);
         }
 
     }
