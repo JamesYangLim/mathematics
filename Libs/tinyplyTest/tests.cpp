@@ -10,7 +10,7 @@
 // the Stanford 3D Scanning Repository, and others. Because of the wide variety of sources and copyright issues, 
 // these files are not re-distributed. 
 
-#include "Libraries/tinyply/tinyply.h"
+#include "Libs/tinyply/tinyply.h"
 using namespace tinyply;
 
 #include "example-utils.hpp"

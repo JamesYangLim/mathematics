@@ -9,5 +9,5 @@ enable_testing()
 include_directories(${PROJECT_SOURCE_DIR})
 
 add_subdirectory(JL)
-add_subdirectory(Libraries)
+add_subdirectory(Libs)
 
