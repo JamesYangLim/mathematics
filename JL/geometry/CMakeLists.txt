@@ -3,7 +3,7 @@
 #
 
 set(CPP src/temp.cpp)
-set(HEADERS Point.h Random.h)
-set(INL detail/Point.inl)
+set(HEADERS Point.h Random.h InfiniteRegularGrid.h)
+set(INL detail/Point.inl detail/InfiniteRegularGrid.inl)
 
 add_library(geometry ${CPP} ${HEADERS} ${INL})

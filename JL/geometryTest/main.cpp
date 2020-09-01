@@ -5,10 +5,12 @@ main.cpp
 #include <iostream>
 
 void TestPoint();
+void TestInifiniteRegularGrid();
 
 int main()
 {
-    TestPoint();
+    //TestPoint();
+    TestInifiniteRegularGrid();
 
     return 0;
 }

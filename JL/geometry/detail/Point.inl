@@ -189,4 +189,14 @@ namespace jl
         return std::acos(DotProduct(lhs, rhs) / std::sqrt(MagnitudeSquare(lhs) * MagnitudeSquare(rhs)));
     }
 
+    template<typename T, size_t D>
+    Point<T, D> ComponentMultiply(const Point<T, D>& lhs, const Point<T, D>& rhs)
+    {
+        Point<T, D> p;
+        for (size_t i = 0; i < D; ++i)
+            p[i] = lhs[i] * rhs[i];
+        return p;
+    }
+
+
 } // namespace jl

@@ -58,6 +58,8 @@ namespace jl
 
     template<typename T, size_t D> T AngleBetween(const Point<T,D>& lhs, const Point<T,D>& rhs);
 
+    template<typename T, size_t D> Point<T, D> ComponentMultiply(const Point<T, D>& lhs, const Point<T, D>& rhs);
+
     //////////////////////////// Point2
 
     template<typename T> using Point2 = Point<T, 2>;
