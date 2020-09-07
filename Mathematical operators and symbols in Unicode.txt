@@ -19,3 +19,31 @@ Mathematical Operation block
 
 
 Mathematical Alphanumeric Symbols block
+
+
+Alpha			Α α	A a
+Beta			Β β	B b
+Gamma			Γ γ	G g
+Delta			Δ δ	D d
+Epsilon			Ε ε	E e
+Zeta			Ζ ζ	Z z
+Eta				Η η	H h
+Theta			Θ θ	Q q
+Theta (alt.)	ϑ	J
+Iota			Ι ι	I i
+Kappa			Κ κ	K k
+Lambda			Λ λ	L l
+Mu				Μ μ	M m
+Nu				Ν ν	N n
+Xi				Ξ ξ	X x
+Omicron			Ο ο	O o
+Pi				Π π	P p
+Rho				Ρ ρ	R r
+Sigma			Σ σ	S s
+Tau				Τ τ	T t
+Upsilon			Υ υ	U u
+Phi				Φ φ	F f
+Phi (alt.)		ϕ	j
+Chi				Χ χ	C c
+Psi				Ψ ψ	Y y
+Omega			Ω ω	W w

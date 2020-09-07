@@ -5,7 +5,7 @@
 add_executable(geometryTest
                 main.cpp
                 PointTest.cpp 
-                InfiniteRegularGridTest.cpp)
+                InfiniteRegularGridTest.cpp "PlyTest.cpp")
 
 target_link_libraries(geometryTest PUBLIC geometry utils)
 

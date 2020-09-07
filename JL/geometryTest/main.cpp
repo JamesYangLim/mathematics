@@ -7,10 +7,14 @@ main.cpp
 void TestPoint();
 void TestInifiniteRegularGrid();
 
+void TestPly();
+
+
 int main()
 {
     //TestPoint();
-    TestInifiniteRegularGrid();
+    //TestInifiniteRegularGrid();
+    TestPly();
 
     return 0;
 }
