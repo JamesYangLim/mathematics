@@ -25,5 +25,5 @@ void TestPly()
 		points.push_back(RandomPoint<T, D>(rn, -10, 10));
 	}
 
-	WritePointsToPlyFile(points, "test");
+	WritePoint3ToPlyFile(points, "test");
 }
