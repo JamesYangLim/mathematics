@@ -36,4 +36,5 @@ namespace jl
 		// Write a binary file
 		points_file.write(outstream_binary, true);
 	}
+
 }

@@ -74,11 +74,11 @@ void TestMatrix()
         std::cout << "Test 3: Transposition test\n";
 
         /*
-        5. det(T(a)) = det(a)
-        6. [a.b] = T(a)b
-        7. If a has only real entries, then T(a)a is a positive-semidefinite matrix.
-        8. Inv(T(a)) = T(Inv(a))
-        9. If a is a square matrix, then its eigenvalues are equal to the eigenvalues of its transpose, since they share the same characteristic polynomial.
+        1. det(T(a)) = det(a)
+        2. [a.b] = T(a)b
+        3. If a has only real entries, then T(a)a is a positive-semidefinite matrix.
+        4. Inv(T(a)) = T(Inv(a))
+        5. If a is a square matrix, then its eigenvalues are equal to the eigenvalues of its transpose, since they share the same characteristic polynomial.
         */
 
         const size_t M = 3, N = 3;
